@@ -8,3 +8,5 @@
  AndreasGra96 ~ Andreas Grammel <br>
 
 ###Zielsetzungen:
+ Den krassesten nicesten und freshesten Angelshop 
+ evar erstellen
