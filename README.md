@@ -9,4 +9,5 @@
 
 ### Zielsetzungen
  Wir wollen eine schöne Webseite mit verschiedenen Funktionen für unseren Online-Shop erstellen.
+ 
  Den krassesten nicesten und freshesten Angelshop evar erstellen.
