@@ -7,6 +7,7 @@
  Nathan-Bauer ~ Nathan Bauer <br>
  AndreasGra96 ~ Andreas Grammel <br>
 
+
 ### Zielsetzungen
  Wir wollen eine schöne Webseite mit verschiedenen Funktionen für unseren Online-Shop erstellen.
  
