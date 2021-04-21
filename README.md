@@ -12,3 +12,7 @@
  Wir wollen eine schöne Webseite mit verschiedenen Funktionen für unseren Online-Shop erstellen.
  
  Den krassesten nicesten und freshesten Angelshop evar erstellen.
+
+### Etappe 1
+
+Bis 28.04.2021
