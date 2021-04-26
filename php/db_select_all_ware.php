@@ -14,9 +14,11 @@ if ($conn->connect_error) {
 //
 $sql = "SELECT * FROM `waren`";
 $res = $conn->query($sql);
-while($row = mysqli_fetch_assoc($res)){
-   print_r($row);
+$rows = array();
+while($r = mysqli_fetch_assoc($res)) {
+    $rows[] = $r;
 }
+print json_encode($rows);
 
 $conn->close();
 ?>
