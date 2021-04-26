@@ -1,4 +1,6 @@
 <?php
+// Skript das alle Datensätze der "waren"-Datenbank abfrägt
+// Autor: Christoph Ederer
 //Datenbankzugang
 $servername = "localhost";
 $username = "root";

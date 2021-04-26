@@ -1,6 +1,5 @@
 <?php
-// Skript das anhand von Übergabeparametern Datensätze aus der "waren"-Datenbank abfrägt
-// RETURN = JSON decoded Array 
+// Skript das anhand von Übergabeparametern Datensätze aus der "waren"-Datenbank löscht
 // Autor: Christoph Ederer
 //Datenbankzugang
 $servername = "localhost";
@@ -20,30 +19,29 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-// Je nach übergebenem Suchparameter Suchanfrage anpassen
+//Je nach übergebenem Suchparameter Suchanfrage anpassen
 if ($ID != 0){
-  $sql = "SELECT * FROM waren WHERE ID = $ID;";
+  $sql = "DELETE FROM waren WHERE ID = $ID;";
 } elseif ($Name != 0 ) {
-  $sql = "SELECT * FROM waren WHERE Name = $Name";
+  $sql = "DELETE FROM waren WHERE Name = $Name";
 } elseif ($Preis != 0){
-  $sql = "SELECT * FROM waren WHERE Preis = $Preis";
+  $sql = "DELETE FROM waren WHERE Preis = $Preis";
 } elseif ($Beschreibung != 0) {
-  $sql = "SELECT * FROM waren WHERE Beschreibung LIKE $Beschreibung";
+  $sql = "DELETE FROM waren WHERE Beschreibung LIKE $Beschreibung";
 }
 else {
-  // Keine / ungenügende Übergabeparameter an das Skript übergeben
   die("SQL Statement incomplete");
 }
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
-  // Result zeilenweise Auslesen und in Array speichern
-  $rows = array();
+  // output data of each row
   while($row = $result->fetch_assoc()) {
-    $rows[] = $row;
+    echo "id: " . $row["ID"]. " - Name: " . $row["NAME"]. " " . $row["PREIS"]. $row["BESCHREIBUNG"]. "<br>";
+  }
+} else {
+  echo "NO results";
 }
-// Das Array in einen JSON String umwandeln
-echo json_encode($rows);
-// Connection beenden
+
 $conn->close();
 ?>
