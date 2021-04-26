@@ -1,4 +1,6 @@
 <?php
+// Skript das anhand von Übergabeparametern Datensätze aus der "waren"-Datenbank einfügt
+// Autor: Christoph Ederer
 //Datenbankzugang
 $servername = "localhost";
 $username = "root";
