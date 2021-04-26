@@ -29,16 +29,16 @@ function insertProduct(ID=0, Name, Preis, Beschreibung){
                 data: {ID, Name, Preis, Beschreibung},
                 //Vor der Anfrage kann ein "Warte-Text angezeigt werden
                 beforeSend: function(xhr){
-                    resp.html("Bitte Warten");
+                    console.log("Bitte Warten");
                 },
 
                 //Bei Fehler im PHP
                 error: function(qXHR, textStatus, errorThrow){
-                    resp.html("Da ist wohl was schiefgelaufen. Bitte den Administrator verständigen");
+                    console.log("Da ist wohl was schiefgelaufen. Bitte den Administrator verständigen");
                 },
                 //Bei Fehlerfreien Ausführung
                 success: function(data, textStatus, jqXHR){
-                    resp.html(data);
+                      console.log(data);
                 }
             });
         });
