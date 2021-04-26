@@ -101,7 +101,7 @@ function getAllProducts(){
                         $.ajax({
                             //Erstellt den "Post" an das PHP Skript
                             type: "POST",
-                            url: "db_select_all_ware.php",
+                            url: "php/db_select_all_ware.php",
                             //Daten für die Dortige SQL Abfrage
                             data: {},
                             dataType: 'JSON',

@@ -20,4 +20,3 @@ Bis 28.04.2021
 - Grobe Website
 - Funktionierendes Backend
 - Kommunikation mit Datenbank
-  (ps Skript um daten aus git in xamp Directorys zu verschieben)
