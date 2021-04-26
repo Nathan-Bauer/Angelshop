@@ -1,7 +1,7 @@
 //Support Funktionen/Schnittstelle zu PHP-Skripten des Backends
 // Autor: Christoph Ederer
-getallProducts();
 /*
+ Autor: Christoph Ederer
  Funktion um Produkt aus Formular in Datenbank einzufügen
 
  Parameter:
@@ -10,7 +10,7 @@ getallProducts();
  Preis:Float          -> Produktpreis
  Beschreibung:String  -> Beschreibung des Produkts
 */
-function insertProduct(ID, Name, Preis, Beschreibung){
+function insertProduct(ID=0, Name, Preis, Beschreibung){
     //Sicherstellen das Übergabeparameter "Korrekt"
     if (arguments.length > 4 || arguments.length < 3){
         // Falsche Parameter Übergeben
@@ -48,6 +48,7 @@ function insertProduct(ID, Name, Preis, Beschreibung){
 
 }//ENDE function inserProduct
 /*
+ Autor: Christoph Ederer
  Funktion um Produkt abhängig von Übergabeparametern aus der Datenbank abzufragen
 
  Parameter:
@@ -62,6 +63,7 @@ function getProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
             //Erstellt den "Post" an das PHP Skript
             type: "POST",
             url: "php/db_select_ware.php",
+            dataType: 'JSON',
             //Daten für die Dortige SQL Abfrage
             data: {ID, Name, Preis, Beschreibung},
             //Vor der Anfrage kann ein "Warte-Text angezeigt werden
@@ -86,10 +88,12 @@ function getProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
     }
 }//ENDE function getProduct
 /*
+ Autor: Christoph Ederer
  Funktion die alle Produkte in der SQL Datenbank  "waren" zurückgibt
-    Rückgabe in JSON Arrayform.
+
+  Rückgabe in JSON Arrayform.
 */
-function getallProducts(){
+function getAllProducts(){
                  jQuery(document).ready(function($){
                         //Speichert die Serverresponse auf den Ajax Aufruf zwischen
                           var returnjsn;
@@ -132,4 +136,34 @@ function getallProducts(){
                       }
                     }
 
-}//ENDE function getallProducts
+}//ENDE function getAllProducts
+/*
+ Autor: Christoph Ederer
+ Funktion um Produkt abhängig von Übergabeparametern aus der Datenbank zu YEETEN
+ Parameter:
+ ID:Integer           -> Produkt ID
+ Name:String          -> Produktname
+ Preis:Float          -> Produktpreis
+ Beschreibung:String  -> Beschreibung des Produkts
+*/
+function yeetProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
+    jQuery(document).ready(function($){
+        $.ajax({
+            //Erstellt den "Post" an das PHP Skript
+            type: "POST",
+            url: "php/db_select_ware.php",
+            dataType: 'JSON',
+            //Daten für die Dortige SQL Abfrage
+            data: {ID, Name, Preis, Beschreibung},
+            //Vor der Anfrage kann ein "Warte-Text angezeigt werden
+            beforeSend: function(xhr){
+            },
+            //Bei Fehler im PHP
+            error: function(qXHR, textStatus, errorThrow){
+            },
+            //Bei Fehlerfreien Ausführung
+            success: function(data, textStatus, jqXHR){
+            }
+        });
+    });
+}//ENDE function yeetProduct

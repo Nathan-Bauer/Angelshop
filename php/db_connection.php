@@ -1,4 +1,6 @@
 <?php
+// Skript das eine TEST-Connection zur Datenbank herstellt
+// Autor: Christoph Ederer
 function OpenCon()
  {
  $dbhost = "localhost";
