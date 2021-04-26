@@ -1,6 +1,7 @@
 //Support Funktionen/Schnittstelle zu PHP-Skripten des Backends
 // Autor: Christoph Ederer
 /*
+ Autor: Christoph Ederer
  Funktion um Produkt aus Formular in Datenbank einzufügen
 
  Parameter:
@@ -47,6 +48,7 @@ function insertProduct(ID=0, Name, Preis, Beschreibung){
 
 }//ENDE function inserProduct
 /*
+ Autor: Christoph Ederer
  Funktion um Produkt abhängig von Übergabeparametern aus der Datenbank abzufragen
 
  Parameter:
@@ -86,10 +88,12 @@ function getProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
     }
 }//ENDE function getProduct
 /*
+ Autor: Christoph Ederer
  Funktion die alle Produkte in der SQL Datenbank  "waren" zurückgibt
-    Rückgabe in JSON Arrayform.
+
+  Rückgabe in JSON Arrayform.
 */
-function getallProducts(){
+function getAllProducts(){
                  jQuery(document).ready(function($){
                         //Speichert die Serverresponse auf den Ajax Aufruf zwischen
                           var returnjsn;
@@ -132,10 +136,10 @@ function getallProducts(){
                       }
                     }
 
-}//ENDE function getallProducts
+}//ENDE function getAllProducts
 /*
+ Autor: Christoph Ederer
  Funktion um Produkt abhängig von Übergabeparametern aus der Datenbank zu YEETEN
-
  Parameter:
  ID:Integer           -> Produkt ID
  Name:String          -> Produktname
@@ -162,4 +166,4 @@ function yeetProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
             }
         });
     });
-}//ENDE function getProduct
+}//ENDE function yeetProduct
