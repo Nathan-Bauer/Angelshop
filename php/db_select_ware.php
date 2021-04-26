@@ -1,12 +1,12 @@
 <?php
 // Skript das anhand von Übergabeparametern Datensätze aus der "waren"-Datenbank abfrägt
-// RETURN = JSON decoded Array 
+// RETURN = JSON decoded Array
 // Autor: Christoph Ederer
 //Datenbankzugang
 $servername = "localhost";
 $username = "root";
 $password = "toor";
-$dbname = "test#1";
+$dbname = "angelshop";
 //Übergabeparameter aus ajax (http_post_data)
 //Übergabe erfolt in Array-Form. Auf werte kann mittels $_POST["key"] zugegriffen werden.
 $ID = $_POST["ID"];

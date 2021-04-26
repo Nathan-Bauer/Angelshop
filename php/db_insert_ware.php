@@ -5,7 +5,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "toor";
-$dbname = "test#1";
+$dbname = "angeshop";
 //Übergabeparameter aus ajax (http_post_data)
 //Übergabe erfolt in Array-Form. Auf werte kann mittels $_POST["key"] zugegriffen werden.
 $ID = $_POST["ID"];
