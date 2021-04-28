@@ -34,15 +34,11 @@ else {
   // Keine / ungenügende Übergabeparameter an das Skript übergeben
   die("SQL Statement incomplete");
 }
-
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-  // Result zeilenweise Auslesen und in Array speichern
-  $rows = array();
-  while($row = $result->fetch_assoc()) {
-    $rows[] = $row;
+$res = $conn->query($sql);
+$rows = array();
+while($r = mysqli_fetch_assoc($res)) {
+    $rows[] = $r;
 }
-// Das Array in einen JSON String umwandeln
 echo json_encode($rows);
 // Connection beenden
 $conn->close();

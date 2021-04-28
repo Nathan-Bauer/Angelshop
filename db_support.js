@@ -29,16 +29,16 @@ function insertProduct(ID=0, Name, Preis, Beschreibung){
                 data: {ID, Name, Preis, Beschreibung},
                 //Vor der Anfrage kann ein "Warte-Text angezeigt werden
                 beforeSend: function(xhr){
-                    resp.html("Bitte Warten");
+                    console.log("Bitte Warten");
                 },
 
                 //Bei Fehler im PHP
                 error: function(qXHR, textStatus, errorThrow){
-                    resp.html("Da ist wohl was schiefgelaufen. Bitte den Administrator verständigen");
+                    console.log("Da ist wohl was schiefgelaufen. Bitte den Administrator verständigen");
                 },
                 //Bei Fehlerfreien Ausführung
                 success: function(data, textStatus, jqXHR){
-                    resp.html(data);
+                      console.log(data);
                 }
             });
         });
@@ -81,7 +81,8 @@ function getProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
     function returnWare(returnjsn) {
         if (returnjsn != undefined) {
             //Ergebnis der Abfrage HIER zurückgeben. ###TODO HTML Print out the Product
-            console.log(returnjsn)
+            console.log(returnjsn);
+            return returnjsn;
         } else {
             console.log("Da ist nix zurückgekommen")
         }
@@ -126,10 +127,7 @@ function getAllProducts(){
                     function returnWaren(returnjsn){
                       if (returnjsn != undefined){
                         console.log(returnjsn);
-                        console.log(returnjsn[0].NAME);
-                        console.log(returnjsn[0].BESCHREIBUNG);
-
-
+                        return returnjsn;
                       }
                       else {
                           console.log("Da ist nix zurückgekommen")

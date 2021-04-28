@@ -20,3 +20,11 @@ Bis 28.04.2021
 - Grobe Website
 - Funktionierendes Backend
 - Kommunikation mit Datenbank
+
+
+### Etappe 2
+
+Bis 05.05.2021
+
+- Anzeigen der Information aus der Datenbank auf der Webseite
+- Suchfunktion
