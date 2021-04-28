@@ -84,7 +84,7 @@ header .search-field {
     padding: 5px;
 }
 
-.products-list {
+.product {
     padding: 10px;
     background-color: lightgreen;
     grid-area: header;
