@@ -43,6 +43,9 @@
     </form>
 </div>
 
+<div class="products-list">
+</div>
+
 <script type="text/javascript">
     let button = document.querySelector("div.form button")
     button.addEventListener('click', () => {
@@ -51,13 +54,15 @@
     });
 </script>
 
-<div class="products-list">
-</div>
-
 <script>
     getAllProducts(displayProducts);
     function displayProducts(products) {
-        console.log("HI");
+        console.log(products);
+        document.querySelector("div.products-list")
+
+        var temp = document.getElementsByTagName("template")[0];
+        var clon = temp.content.cloneNode(true);
+        document.body.appendChild(clon);
     }
 </script>
 
