@@ -32,6 +32,8 @@ main {
 
 .shopping-cart {
     width: 40px;
+    margin-right: 20px;
+    margin-top: 10px;
 }
 
 
@@ -41,7 +43,7 @@ header {
     border-top: thick solid #59ce7c;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: grid;
-    grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     position: sticky;
     top: 0;
 }
@@ -51,7 +53,7 @@ header .logo:hover {
 }
 
 header .logo {
-    grid-column: 2/3;
+    grid-column: 1/2;
     text-decoration: none;
     color: var(--header-logo);
     transform: scale(1, 1);
@@ -70,6 +72,15 @@ header .title {
     font-family: 'Work Sans', sans-serif;
     font-size: 2rem;
     font-weight: 600;
+    margin-right: 50px;
+}
+
+header .search-field {
+    font-size: 25px;
+    width: calc(100% - 14px);
+    margin: auto;
+    display: block;
+    padding: 5px;
 }
 
 .products-list {
