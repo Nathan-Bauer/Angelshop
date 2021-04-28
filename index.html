@@ -54,8 +54,6 @@
     </form>
 </div>
 
-
-
 <footer>
     FOOTER
 </footer>
@@ -73,26 +71,20 @@
 
     function displayProducts(products) {
         console.log(products);
-
         products.forEach(product => {
             let template = document.querySelector("template").content.cloneNode(true);
-            console.log(template)
 
             template.childNodes.forEach(childNode => {
-                console.log(childNode)
                 if (childNode.className == "product")
                     childNode.childNodes.forEach(childNode => {
-                        console.log(childNode)
                         if (childNode.className == "name")
                             childNode.innerHTML = product.NAME;
                         else if (childNode.className == "description")
                             childNode.innerHTML = product.BESCHREIBUNG;
                         else if (childNode.className == "price")
                             childNode.innerHTML = product.PREIS;
-                        console.log(childNode)
                     })
             });
-
             document.querySelector("div.products-list").appendChild(template);
         })
 
