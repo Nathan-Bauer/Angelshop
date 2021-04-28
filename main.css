@@ -72,6 +72,36 @@ header .title {
     font-weight: 600;
 }
 
+.products-list {
+    padding: 10px;
+    background-color: lightgreen;
+    grid-area: header;
+    border: 2px solid black;
+}
+
+.product-name {
+    padding-bottom: 10px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.product-price {
+    text-align: right;
+    font-weight: bold;
+}
+
+.products-list .name {
+    font-size: 22px;
+}
+
+.products-list .price {
+    font-size: 17px;
+}
+
+
+
+
+
 
 
 
