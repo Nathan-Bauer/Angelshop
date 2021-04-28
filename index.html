@@ -16,6 +16,7 @@
     </template>
 </head>
 
+
 <body>
 <header>
     <a class="logo" href="index.html">
@@ -188,13 +189,13 @@
 </script>
 
 <div class="products-list">
-    <div class="test"></div>
-    <div class="test2"></div>
-    <div class="test3"></div>
 </div>
 
 <script>
-    getAllProducts()
+    getAllProducts(displayProducts);
+    function displayProducts(products) {
+        console.log("HI");
+    }
 </script>
 
 <footer>
