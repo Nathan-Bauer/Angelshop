@@ -9,9 +9,9 @@
     <script src="db_support.js"></script>
     <template>
         <div class="product">
-            <span class="name"></span>
-            <span class="description"></span>
-            <span class="price"></span>
+            <div class ="product-name"><span class="name"></span></div>
+            <div class ="product-description"><span class="description"></span></div>
+            <div class ="product-price"><span class="price"></span></div>
         </div>
     </template>
 </head>
@@ -41,7 +41,7 @@
                     <span class="description">Dies ist Angel 1. Sie hat eine dunkle Farbe und ist 2 Meter lang. Für alle Angler geeignet.</span>
                 </div>
                 <div class ="product-price">
-                    <span class="price">99,99</span>
+                    <span class="price">99,99 €</span>
                 </div>
             </div>
         </div>
@@ -76,22 +76,14 @@
     function displayProducts(products) {
         console.log(products);
         products.forEach(product => {
-            let template = document.querySelector("template").content.cloneNode(true);
+            let clone = document.querySelector("template").content.cloneNode(true);
 
-            template.childNodes.forEach(childNode => {
-                if (childNode.className == "product")
-                    childNode.childNodes.forEach(childNode => {
-                        if (childNode.className == "name")
-                            childNode.innerHTML = product.NAME;
-                        else if (childNode.className == "description")
-                            childNode.innerHTML = product.BESCHREIBUNG;
-                        else if (childNode.className == "price")
-                            childNode.innerHTML = product.PREIS;
-                    })
-            });
-            document.querySelector("div.products-list").appendChild(template);
+            clone.querySelector("div.product span.name").innerHTML = product.NAME;
+            clone.querySelector("div.product span.description").innerHTML = product.BESCHREIBUNG;
+            clone.querySelector("div.product span.price").innerHTML = "" + product.PREIS + " €";
+
+            document.querySelector("div.products-list").appendChild(clone);
         })
-
     }
 </script>
 
