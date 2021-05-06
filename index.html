@@ -9,10 +9,16 @@
     <script src="db_support.js"></script>
     <template>
         <div class="product">
-            <div class ="product-name"><span onclick="pictureOpener(this.name)" class="name"></span></div>
-            <div class ="product-description"><span class="description"></span></div>
-            <div class ="product-price"><span class="price"></span></div>
-            <div class ="product-picture">
+            <div class="product-name">
+                <span onclick="pictureOpener(this.name)" class="name"></span>
+            </div>
+            <div class="product-description">
+                <span class="description"></span>
+            </div>
+            <div class="product-price">
+                <span class="price"></span>
+            </div>
+            <div class="product-picture">
                 A picture will be here.
             </div>
         </div>
@@ -39,7 +45,7 @@
         <div class="products-list" id="products-list">
             <div class="product">
                 <div class ="product-name">
-                    <span onclick="myFunction()" class="name">Angel 1</span>
+                    <span onclick="pictureOpener('myDIV')" class="name">Angel 1</span>
                 </div>
                 <div class ="product-description">
                     <span class="description">Dies ist Angel 1. Sie hat eine dunkle Farbe und ist 2 Meter lang. Für alle Angler geeignet.</span>
@@ -95,16 +101,16 @@
 
     function displayProducts(products) {
         console.log(products);
-        let i = 0;
-        products.forEach(product => {
+
+        products.forEach((product, index) => {
             let clone = document.querySelector("template").content.cloneNode(true);
 
             clone.querySelector("div.product span.name").innerHTML = product.NAME;
             clone.querySelector("div.product span.description").innerHTML = product.BESCHREIBUNG;
             clone.querySelector("div.product span.price").innerHTML = "" + product.PREIS + " €";
 
-            clone.querySelector("div.product div.product-picture").id = i +"picture";
-            clone.querySelector("div.product span.name").name = i++ +"picture";
+            clone.querySelector("div.product div.product-picture").id = index + "picture";
+            clone.querySelector("div.product span.name").name = index + "picture";
 
             document.querySelector("div.products-list").appendChild(clone);
         })
