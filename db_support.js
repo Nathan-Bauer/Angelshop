@@ -10,15 +10,14 @@
  Preis:Float          -> Produktpreis
  Beschreibung:String  -> Beschreibung des Produkts
 */
-function insertProduct(ID=0, Name, Preis, Beschreibung){
+function insertProduct(ID = 0, Name, Preis, Beschreibung) {
     //Sicherstellen das Übergabeparameter "Korrekt"
-    if (arguments.length > 4 || arguments.length < 3){
+    if (arguments.length > 4 || arguments.length < 3) {
         // Falsche Parameter Übergeben
         console.log("Error###TODO DO SOME ErrorStuff")
-    }
-    else{
+    } else {
         // Parameter Passen
-        jQuery(document).ready(function($){
+        jQuery(document).ready(function ($) {
 
             var resp = $("#response");
             $.ajax({
@@ -28,17 +27,17 @@ function insertProduct(ID=0, Name, Preis, Beschreibung){
                 //Daten für die Dortige SQL Abfrage
                 data: {ID, Name, Preis, Beschreibung},
                 //Vor der Anfrage kann ein "Warte-Text angezeigt werden
-                beforeSend: function(xhr){
+                beforeSend: function (xhr) {
                     console.log("Bitte Warten");
                 },
 
                 //Bei Fehler im PHP
-                error: function(qXHR, textStatus, errorThrow){
+                error: function (qXHR, textStatus, errorThrow) {
                     console.log("Da ist wohl was schiefgelaufen. Bitte den Administrator verständigen");
                 },
                 //Bei Fehlerfreien Ausführung
-                success: function(data, textStatus, jqXHR){
-                      console.log(data);
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
                 }
             });
         });
@@ -57,8 +56,8 @@ function insertProduct(ID=0, Name, Preis, Beschreibung){
  Preis:Float          -> Produktpreis
  Beschreibung:String  -> Beschreibung des Produkts
 */
-function getProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
-    jQuery(document).ready(function($){
+function getProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0) {
+    jQuery(document).ready(function ($) {
         $.ajax({
             //Erstellt den "Post" an das PHP Skript
             type: "POST",
@@ -67,17 +66,18 @@ function getProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
             //Daten für die Dortige SQL Abfrage
             data: {ID, Name, Preis, Beschreibung},
             //Vor der Anfrage kann ein "Warte-Text angezeigt werden
-            beforeSend: function(xhr){
+            beforeSend: function (xhr) {
             },
             //Bei Fehler im PHP
-            error: function(qXHR, textStatus, errorThrow){
+            error: function (qXHR, textStatus, errorThrow) {
             },
             //Bei Fehlerfreien Ausführung
-            success: function(data, textStatus, jqXHR){
-              returnWare(data) ;
+            success: function (data, textStatus, jqXHR) {
+                returnWare(data);
             }
         });
     });
+
     function returnWare(returnjsn) {
         if (returnjsn != undefined) {
             //Ergebnis der Abfrage HIER zurückgeben. ###TODO HTML Print out the Product
@@ -94,45 +94,46 @@ function getProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
 
   Rückgabe in JSON Arrayform.
 */
-function getAllProducts(){
-                 jQuery(document).ready(function($){
-                        //Speichert die Serverresponse auf den Ajax Aufruf zwischen
-                          var returnjsn;
-                        var resp = $("#response");
-                        $.ajax({
-                            //Erstellt den "Post" an das PHP Skript
-                            type: "POST",
-                            url: "php/db_select_all_ware.php",
-                            //Daten für die Dortige SQL Abfrage
-                            data: {},
-                            dataType: 'JSON',
-                            //Vor der Anfrage kann ein "Warte-Text angezeigt werden
-                            beforeSend: function(xhr){
-                                resp.html("Bitte Warten");
-                                console.log("Sende...")
-                            },
+function getAllProducts(callback) {
+    jQuery(document).ready(function ($) {
+        //Speichert die Serverresponse auf den Ajax Aufruf zwischen
+        var returnjsn;
+        var resp = $("#response");
+        $.ajax({
+            //Erstellt den "Post" an das PHP Skript
+            type: "POST",
+            url: "php/db_select_all_ware.php",
+            //Daten für die Dortige SQL Abfrage
+            data: {},
+            dataType: 'JSON',
+            //Vor der Anfrage kann ein "Warte-Text angezeigt werden
+            beforeSend: function (xhr) {
+                resp.html("Bitte Warten");
+                console.log("Sende...")
+            },
 
-                            //Bei Fehler im PHP
-                            error: function(qXHR, textStatus, errorThrow){
-                                resp.html("Da ist wohl was schiefgelaufen. Bitte den Administrator verständigen");
-                            },
-                            //Bei Fehlerfreien Ausführung
-                            success: function(data, textStatus, jqXHR){
-                                returnWaren(data);
-                                resp.html(data);
-                              }
-                        });
+            //Bei Fehler im PHP
+            error: function (qXHR, textStatus, errorThrow) {
+                resp.html("Da ist wohl was schiefgelaufen. Bitte den Administrator verständigen");
+            },
+            //Bei Fehlerfreien Ausführung
+            success: function (data, textStatus, jqXHR) {
+                //returnWaren(data);
+                resp.html(data);
+                callback(data);
+            }
+        });
 
-                    });
-                    function returnWaren(returnjsn){
-                      if (returnjsn != undefined){
-                        console.log(returnjsn);
-                        return returnjsn;
-                      }
-                      else {
-                          console.log("Da ist nix zurückgekommen")
-                      }
-                    }
+    });
+
+    function returnWaren(returnjsn) {
+        if (returnjsn != undefined) {
+            console.log("return folgt" + returnjsn);
+            return returnjsn;
+        } else {
+            console.log("Da ist nix zurückgekommen")
+        }
+    }
 
 }//ENDE function getAllProducts
 /*
@@ -144,8 +145,8 @@ function getAllProducts(){
  Preis:Float          -> Produktpreis
  Beschreibung:String  -> Beschreibung des Produkts
 */
-function yeetProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
-    jQuery(document).ready(function($){
+function yeetProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0) {
+    jQuery(document).ready(function ($) {
         $.ajax({
             //Erstellt den "Post" an das PHP Skript
             type: "POST",
@@ -154,13 +155,13 @@ function yeetProduct(ID = 0, Name = 0, Preis =0, Beschreibung=0){
             //Daten für die Dortige SQL Abfrage
             data: {ID, Name, Preis, Beschreibung},
             //Vor der Anfrage kann ein "Warte-Text angezeigt werden
-            beforeSend: function(xhr){
+            beforeSend: function (xhr) {
             },
             //Bei Fehler im PHP
-            error: function(qXHR, textStatus, errorThrow){
+            error: function (qXHR, textStatus, errorThrow) {
             },
             //Bei Fehlerfreien Ausführung
-            success: function(data, textStatus, jqXHR){
+            success: function (data, textStatus, jqXHR) {
             }
         });
     });

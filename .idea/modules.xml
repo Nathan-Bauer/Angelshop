@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Angelshop.iml" filepath="$PROJECT_DIR$/.idea/Angelshop.iml" />
+      <module fileurl="file://$USER_HOME$/WebstormProjects/WebDev/.idea/Aufgaben.iml" filepath="$USER_HOME$/WebstormProjects/WebDev/.idea/Aufgaben.iml" />
+      <module fileurl="file://$USER_HOME$/WebstormProjects/Testat/.idea/Testat.iml" filepath="$USER_HOME$/WebstormProjects/Testat/.idea/Testat.iml" />
     </modules>
   </component>
 </project>
