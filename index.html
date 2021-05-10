@@ -10,7 +10,7 @@
     <template>
         <div class="product">
             <div class="product-name">
-                <span onclick="pictureOpener(this.name)" class="name"></span>
+                <span class="name"></span>
             </div>
             <div class="product-description">
                 <span class="description"></span>
@@ -82,7 +82,6 @@
         if (confirm("Artikel hinzufügen?")) insertProduct(undefined, document.getElementById("Name").value,
             document.getElementById("Preis").value, document.getElementById("Beschreibung").value)
     });
-
 </script>
 
 <script>
@@ -105,16 +104,57 @@
         products.forEach((product, index) => {
             let clone = document.querySelector("template").content.cloneNode(true);
 
+            clone.querySelector("div.product").classList.add(`id-${index}`);
+
             clone.querySelector("div.product span.name").innerHTML = product.NAME;
             clone.querySelector("div.product span.description").innerHTML = product.BESCHREIBUNG;
             clone.querySelector("div.product span.price").innerHTML = "" + product.PREIS + " €";
 
-            clone.querySelector("div.product div.product-picture").id = index + "picture";
-            clone.querySelector("div.product span.name").name = index + "picture";
-
             document.querySelector("div.products-list").appendChild(clone);
-        })
+        });
+
+        addEventListeners();
     }
+</script>
+
+<script>
+    function addEventListeners() {
+        document.querySelectorAll('div.product').forEach(product => {
+
+            product.querySelector('div.product span.name').addEventListener('click', toggleFoldoutArea)
+        });
+    }
+
+    function toggleFoldoutArea() {
+        let foldoutArea = document.querySelector('div.product div.product-picture');
+
+        if (foldoutArea.style.display == 'block') {
+            foldoutArea.style.display = 'none';
+        } else {
+            foldoutArea.style.display = 'block';
+        }
+    }
+</script>
+
+<script>
+    function addToCart(productId) {
+        let productIds = JSON.parse(getCookieValue("shoppingCart"));
+        productIds.append(productId);
+        document.cookie = `shoppingCart=${JSON.stringify(productIds)}; max-age=${60*60*24*365}`;
+    }
+
+    function getCookieValue(cookie) {
+        return document.cookie
+            .split('; ')
+            .find(str => str.startsWith(`${cookie}=`))
+            .split('=')[1];
+    }
+</script>
+
+<script>
+    Array.from(product.classList).find(className =>
+        className.match(/\d+/) !== null
+    )
 </script>
 
 </body>
