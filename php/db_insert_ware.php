@@ -12,16 +12,31 @@ $ID = $_POST["ID"];
 $Name = $_POST["Name"];
 $Preis = $_POST["Preis"];
 $Beschreibung = $_POST["Beschreibung"];
+$Kategorie = $_POST["Kategorie"];
+$Picture_ID = $_POST["Picture_ID"];
 
+echo "Die Kategorie". $Kategorie ." ";
 // Erstellt die Connection zur Datenbank
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Stellt die Verbindung sicher
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-//
-$sql = "INSERT INTO waren (ID, NAME,	BESCHREIBUNG, PREIS)
-VALUES ('NULL', '$Name', '$Beschreibung', '$Preis')";
+//Nächste Freie BILD ID reservieren
+if ($Picture_ID){
+$result = $conn->query("
+    SHOW TABLE STATUS LIKE 'pictures'
+");
+$data = mysqli_fetch_assoc($result);
+$next_increment = $data['Auto_increment'];
+
+$sql = "INSERT INTO waren (ID, NAME,	BESCHREIBUNG, PREIS, Picture_ID)
+VALUES ('NULL', '$Name', '$Beschreibung', '$Preis', '$next_increment' )";
+}else {
+$sql = "INSERT INTO waren (ID, NAME,	BESCHREIBUNG, PREIS, Picture_ID)
+VALUES ('NULL', '$Name', '$Beschreibung', '$Preis', 'NULL')";
+}
+
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
