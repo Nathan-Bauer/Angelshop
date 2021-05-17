@@ -95,6 +95,12 @@
     }
 </script>
 
+
+
+
+
+
+
 <script>
     getAllProducts(displayProducts);
 
@@ -152,9 +158,13 @@
 </script>
 
 <script>
-    Array.from(product.classList).find(className =>
-        className.match(/\d+/) !== null
-    )
+    document.querySelectorAll('div.product').forEach(product => {
+
+        return Array.from(product.classList).find(className =>
+            className.match(/\d+/) !== null
+        );
+    });
+
 </script>
 
 </body>
