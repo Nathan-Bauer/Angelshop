@@ -26,8 +26,6 @@ if(isset($_FILES['file']['name'])){
         $dbname = "angelshop";
         //Übergabeparameter aus ajax (http_post_data)
         //Übergabe erfolt in Array-Form. Auf werte kann mittels $_POST["key"] zugegriffen werden.
-
-        echo "Die Kategorie". $Kategorie ." ";
         // Erstellt die Connection zur Datenbank
         $conn = new mysqli($servername, $username, $password, $dbname);
         // Stellt die Verbindung sicher
