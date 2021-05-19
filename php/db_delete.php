@@ -20,17 +20,11 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 //Je nach übergebenem Suchparameter Suchanfrage anpassen
-if ($ID != 0){
-  $sql = "DELETE FROM waren WHERE ID = $ID;";
-} elseif ($Name != 0 ) {
-  $sql = "DELETE FROM waren WHERE Name = $Name";
-} elseif ($Preis != 0){
-  $sql = "DELETE FROM waren WHERE Preis = $Preis";
-} elseif ($Beschreibung != 0) {
-  $sql = "DELETE FROM waren WHERE Beschreibung LIKE $Beschreibung";
+if ($ID != 0 && $Name != 0 && $Preis != 0 $Beschreibung != 0 ){
+  $sql = "DELETE FROM waren WHERE ID = $ID && Name = $Name && Preis = $Preis && Beschreibung LIKE $Beschreibung;";
 }
 else {
-  die("SQL Statement incomplete");
+  die("SQL Statement incomplete, Not all Parameters matched");
 }
 
 $result = $conn->query($sql);

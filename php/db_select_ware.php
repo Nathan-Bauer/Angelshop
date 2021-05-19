@@ -13,6 +13,7 @@ $ID = $_POST["ID"];
 $Name = $_POST["Name"];
 $Preis = $_POST["Preis"];
 $Beschreibung = $_POST["Beschreibung"];
+$Kategorie = $_POST["Kategorie"];
 
 // Erstellt die Connection zur Datenbank
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -29,7 +30,8 @@ if ($ID != 0){
   $sql = "SELECT * FROM waren WHERE Preis = $Preis";
 } elseif ($Beschreibung != 0) {
   $sql = "SELECT * FROM waren WHERE Beschreibung LIKE $Beschreibung";
-}
+}elseif ($Beschreibung != 0) {
+  $sql = "SELECT * FROM waren WHERE Kategorie LIKE $Kategorie";
 else {
   // Keine / ungenügende Übergabeparameter an das Skript übergeben
   die("SQL Statement incomplete");

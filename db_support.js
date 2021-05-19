@@ -16,7 +16,6 @@ function insertProduct(ID = 0, Name, Preis, Beschreibung, Kategorie, Picture_ID)
     //Sicherstellen das Übergabeparameter "Korrekt"
     if (arguments.length > 6 || arguments.length < 3) {
         // Falsche Parameter Übergeben
-
         console.log("Error: "+arguments.length+"-Argumente an insertProdukt() übergeben. 3-6 Argumente erwartet ");
     } else {
         // Parameter Passen
@@ -27,11 +26,6 @@ function insertProduct(ID = 0, Name, Preis, Beschreibung, Kategorie, Picture_ID)
                 url: "php/db_insert_ware.php",
                 //Daten für die Dortige SQL Abfrage
                 data: {ID, Name, Preis, Beschreibung, Kategorie, Picture_ID},
-                //Vor der Anfrage kann ein "Warte-Text angezeigt werden
-                beforeSend: function (xhr) {
-                    console.log("Bitte Warten...");
-                },
-
                 //Bei Fehler im PHP
                 error: function (qXHR, textStatus, errorThrow) {
                     console.log("Beim Einfügen der Daten ist ein Fehler entstanden. Bitte den Administrator verständigen");
@@ -56,7 +50,6 @@ function insertPicture(picture){
 
         var files = picture;
         var filename = files[0].name;
-        console.log(filename);
         if(files.length > 0 ){
 
             var formData = new FormData();
@@ -105,10 +98,6 @@ function getPicture(Picture_ID, callback){
           dataType: 'JSON',
           //Daten für die Dortige SQL Abfrage
           data: {Picture_ID},
-          //Vor der Anfrage
-          beforeSend: function (xhr) {
-              console.log("Bitte Warten...");
-          },
           //Bei Fehler im PHP
           error: function (qXHR, textStatus, errorThrow) {
               console.log("Beim Abrufen der Datenbank ist ein Fehler aufgetreten. Bitte den Administrator verständigen");
@@ -133,7 +122,7 @@ function getPicture(Picture_ID, callback){
  Preis:Float          -> Produktpreis
  Beschreibung:String  -> Beschreibung des Produkts
 */
-function getProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0) {
+function getProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0, Kategorie = 0) {
     jQuery(document).ready(function ($) {
         $.ajax({
             //Erstellt den "Post" an das PHP Skript
@@ -141,11 +130,7 @@ function getProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0) {
             url: "php/db_select_ware.php",
             dataType: 'JSON',
             //Daten für die Dortige SQL Abfrage
-            data: {ID, Name, Preis, Beschreibung},
-            //Vor der Anfrage
-            beforeSend: function (xhr) {
-                console.log("Bitte Warten...");
-            },
+            data: {ID, Name, Preis, Beschreibung, Kategorie},
             //Bei Fehler im PHP
             error: function (qXHR, textStatus, errorThrow) {
                 console.log("Beim Abrufen der Datenbank ist ein Fehler aufgetreten. Bitte den Administrator verständigen");
@@ -173,18 +158,12 @@ function getAllProducts(callback) {
             //Daten für die Dortige SQL Abfrage
             data: {},
             dataType: 'JSON',
-            //Vor der Anfrage kann ein "Warte-Text angezeigt werden
-            beforeSend: function (xhr) {
-                console.log("Bitte Warten...");
-            },
-
             //Bei Fehler im PHP
             error: function (qXHR, textStatus, errorThrow) {
                 console.log("Es ist ein Fehler beim Aufruf der Produkte aus der Datenbank aufgetreten. Bitte den Administrator verständigen");
             },
             //Bei Fehlerfreien Ausführung
             success: function (data, textStatus, jqXHR) {
-                //console.log(data);
                 callback(data);
             }
         });
@@ -208,10 +187,6 @@ function yeetProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0) {
             dataType: 'JSON',
             //Daten für die Dortige SQL Abfrage
             data: {ID, Name, Preis, Beschreibung},
-            //Vor der Anfrage kann ein "Warte-Text angezeigt werden
-            beforeSend: function (xhr) {
-                console.log("Bitte Warten...");
-            },
             //Bei Fehler im PHP
             error: function (qXHR, textStatus, errorThrow) {
                 console.log("Beim Löschen des Produkts ist ein Fehler Aufgetreten");
