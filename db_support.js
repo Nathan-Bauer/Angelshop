@@ -50,10 +50,9 @@ function insertProduct(ID = 0, Name, Preis, Beschreibung, Kategorie, Picture_ID)
  Funktion um Bilder in Datenbank einzufügen, und am Server abzuspeichern
 
  Parameter:
-###
+ picture:File -> Enthält das Hochgeladene Bild aus dem Input
 */
-function insertPicture(picture, ID){
-    // Upload file
+function insertPicture(picture){
 
         var files = picture;
         var filename = files[0].name;
@@ -73,6 +72,7 @@ function insertPicture(picture, ID){
                 if (this.readyState == 4 && this.status == 200) {
 
                     var response = this.responseText;
+                    console.log("This is the Response from xhttp :".response);
                     if(response == 1){
                         alert("Upload successfully.");
                     }else{
@@ -89,6 +89,40 @@ function insertPicture(picture, ID){
         }
 
 }//ENDE function insertPicture
+/*
+ Autor: Christoph Ederer
+ Funktion um Bilderpfade aus der Datenbank abzufragen
+
+ Parameter:
+ Picture_ID:INT   -> Integer der Picture ID
+*/
+function getPicture(Picture_ID, callback){
+  jQuery(document).ready(function ($) {
+      $.ajax({
+          //Erstellt den "Post" an das PHP Skript
+          type: "POST",
+          url: "php/db_select_picture.php",
+          dataType: 'JSON',
+          //Daten für die Dortige SQL Abfrage
+          data: {Picture_ID},
+          //Vor der Anfrage
+          beforeSend: function (xhr) {
+              console.log("Bitte Warten...");
+          },
+          //Bei Fehler im PHP
+          error: function (qXHR, textStatus, errorThrow) {
+              console.log("Beim Abrufen der Datenbank ist ein Fehler aufgetreten. Bitte den Administrator verständigen");
+          },
+          //Bei Fehlerfreien Ausführung
+          success: function (data, textStatus, jqXHR) {
+
+            callback(data)
+          }
+      });
+  });
+
+}//ENDE function getPicture
+
 /*
  Autor: Christoph Ederer
  Funktion um Produkt abhängig von Übergabeparametern aus der Datenbank abzufragen
@@ -119,7 +153,6 @@ function getProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0) {
             //Bei Fehlerfreien Ausführung
             success: function (data, textStatus, jqXHR) {
                 console.log(data);
-                callback(data);
             }
         });
     });
@@ -132,8 +165,7 @@ function getProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0) {
 */
 function getAllProducts(callback) {
     jQuery(document).ready(function ($) {
-        //Speichert die Serverresponse auf den Ajax Aufruf zwischen
-        var returnjsn;
+
         $.ajax({
             //Erstellt den "Post" an das PHP Skript
             type: "POST",

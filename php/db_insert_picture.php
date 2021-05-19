@@ -6,7 +6,7 @@ if(isset($_FILES['file']['name'])){
 
    // Location
    $location = '../uploaded_pictures/'.$filename;
-
+   $location_for_sql= '../Angelshop/uploaded_pictures/'.$filename;
    // file extension
    $file_extension = pathinfo($location, PATHINFO_EXTENSION);
    $file_extension = strtolower($file_extension);
@@ -36,7 +36,7 @@ if(isset($_FILES['file']['name'])){
         }
         //
         $sql = "INSERT INTO pictures (ID, image)
-        VALUES ('NULL', '$location')";
+        VALUES ('NULL', '$location_for_sql')";
 
         if ($conn->query($sql) === TRUE) {
           echo "New record created successfully";

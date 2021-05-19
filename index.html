@@ -19,7 +19,7 @@
                 <span class="price"></span>
             </div>
             <div class="product-picture">
-                A picture will be here.
+                <img name="product-picture">
             </div>
         </div>
         <br>
@@ -54,7 +54,7 @@
                     <span class="price">99,99 €</span>
                 </div>
                 <div id="myDIV" class="product-picture">
-                    This is my DIV element.
+                      <img src="" alt="Prod.picture" id="prod_pic">
                 </div>
             </div>
             <br>
@@ -132,21 +132,26 @@
 
 <script>
     getAllProducts(displayProducts);
-
     function displayProducts(products) {
-        console.log(products);
 
         products.forEach((product, index) => {
-            let clone = document.querySelector("template").content.cloneNode(true);
+            getPicture(product.Picture_ID,displayPicture);
+            function displayPicture(image){
+              let clone = document.querySelector("template").content.cloneNode(true);
+              let path = image[0].image;
 
-            clone.querySelector("div.product span.name").innerHTML = product.NAME;
-            clone.querySelector("div.product span.description").innerHTML = product.BESCHREIBUNG;
-            clone.querySelector("div.product span.price").innerHTML = "" + product.PREIS + " €";
+              clone.querySelector("div.product span.name").innerHTML = product.NAME;
+              clone.querySelector("div.product span.description").innerHTML = product.BESCHREIBUNG;
+              clone.querySelector("div.product span.price").innerHTML = "" + product.PREIS + " €";
 
-            clone.querySelector("div.product div.product-picture").id = index + "picture";
-            clone.querySelector("div.product span.name").name = index + "picture";
+              clone.querySelector("div.product div.product-picture").id = index + "picture";
+              clone.querySelector("div.product span.name").name = index + "picture";
+              clone.querySelector("div.product div.product-picture img[name='product-picture']").src =path;
+              document.querySelector("div.products-list").appendChild(clone);
+            }
 
-            document.querySelector("div.products-list").appendChild(clone);
+
+
         })
     }
 </script>

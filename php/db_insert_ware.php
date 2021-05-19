@@ -28,7 +28,7 @@ $result = $conn->query("
     SHOW TABLE STATUS LIKE 'pictures'
 ");
 $data = mysqli_fetch_assoc($result);
-$next_increment = $data['Auto_increment'];
+$next_increment = $data['Auto_increment']-1;
 
 $sql = "INSERT INTO waren (ID, NAME,	BESCHREIBUNG, PREIS, Picture_ID)
 VALUES ('NULL', '$Name', '$Beschreibung', '$Preis', '$next_increment' )";
