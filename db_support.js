@@ -9,31 +9,32 @@
  Name:String          -> Produktname
  Preis:Float          -> Produktpreis
  Beschreibung:String  -> Beschreibung des Produkts
+ Kategorie:String     -> Kategorie des Produkts. Wird default auf "default" gesetzt.
+                         Mögliche Werte: (default | Rute | Rolle | Schnur | Haken | Köder | Futter | Sonstiges )
 */
-function insertProduct(ID = 0, Name, Preis, Beschreibung) {
+function insertProduct(ID = 0, Name, Preis, Beschreibung, Kategorie, Picture_ID) {
     //Sicherstellen das Übergabeparameter "Korrekt"
-    if (arguments.length > 4 || arguments.length < 3) {
+    if (arguments.length > 6 || arguments.length < 3) {
         // Falsche Parameter Übergeben
-        console.log("Error###TODO DO SOME ErrorStuff")
+
+        console.log("Error: "+arguments.length+"-Argumente an insertProdukt() übergeben. 3-6 Argumente erwartet ");
     } else {
         // Parameter Passen
         jQuery(document).ready(function ($) {
-
-            var resp = $("#response");
             $.ajax({
                 //Erstellt den "Post" an das PHP Skript
                 type: "POST",
                 url: "php/db_insert_ware.php",
                 //Daten für die Dortige SQL Abfrage
-                data: {ID, Name, Preis, Beschreibung},
+                data: {ID, Name, Preis, Beschreibung, Kategorie, Picture_ID},
                 //Vor der Anfrage kann ein "Warte-Text angezeigt werden
                 beforeSend: function (xhr) {
-                    console.log("Bitte Warten");
+                    console.log("Bitte Warten...");
                 },
 
                 //Bei Fehler im PHP
                 error: function (qXHR, textStatus, errorThrow) {
-                    console.log("Da ist wohl was schiefgelaufen. Bitte den Administrator verständigen");
+                    console.log("Beim Einfügen der Daten ist ein Fehler entstanden. Bitte den Administrator verständigen");
                 },
                 //Bei Fehlerfreien Ausführung
                 success: function (data, textStatus, jqXHR) {
@@ -41,11 +42,87 @@ function insertProduct(ID = 0, Name, Preis, Beschreibung) {
                 }
             });
         });
-
-
     }
 
-}//ENDE function inserProduct
+}//ENDE function insertProduct
+/*
+ Autor: Christoph Ederer
+ Funktion um Bilder in Datenbank einzufügen, und am Server abzuspeichern
+
+ Parameter:
+ picture:File -> Enthält das Hochgeladene Bild aus dem Input
+*/
+function insertPicture(picture){
+
+        var files = picture;
+        var filename = files[0].name;
+        console.log(filename);
+        if(files.length > 0 ){
+
+            var formData = new FormData();
+            formData.append("file", files[0]);
+
+            var xhttp = new XMLHttpRequest();
+
+            // Set POST method and ajax file path
+            xhttp.open("POST", "php/db_insert_picture.php", true);
+
+            // call on request changes state
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    var response = this.responseText;
+                    console.log("This is the Response from xhttp :".response);
+                    if(response == 1){
+                        alert("Upload successfully.");
+                    }else{
+                        alert("File not uploaded.");
+                    }
+                }
+            };
+
+            // Send request with data
+            xhttp.send(formData);
+
+        }else{
+            alert("Please select a file");
+        }
+
+}//ENDE function insertPicture
+/*
+ Autor: Christoph Ederer
+ Funktion um Bilderpfade aus der Datenbank abzufragen
+
+ Parameter:
+ Picture_ID:INT   -> Integer der Picture ID
+*/
+function getPicture(Picture_ID, callback){
+  jQuery(document).ready(function ($) {
+      $.ajax({
+          //Erstellt den "Post" an das PHP Skript
+          type: "POST",
+          url: "php/db_select_picture.php",
+          dataType: 'JSON',
+          //Daten für die Dortige SQL Abfrage
+          data: {Picture_ID},
+          //Vor der Anfrage
+          beforeSend: function (xhr) {
+              console.log("Bitte Warten...");
+          },
+          //Bei Fehler im PHP
+          error: function (qXHR, textStatus, errorThrow) {
+              console.log("Beim Abrufen der Datenbank ist ein Fehler aufgetreten. Bitte den Administrator verständigen");
+          },
+          //Bei Fehlerfreien Ausführung
+          success: function (data, textStatus, jqXHR) {
+
+            callback(data)
+          }
+      });
+  });
+
+}//ENDE function getPicture
+
 /*
  Autor: Christoph Ederer
  Funktion um Produkt abhängig von Übergabeparametern aus der Datenbank abzufragen
@@ -65,40 +142,30 @@ function getProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0) {
             dataType: 'JSON',
             //Daten für die Dortige SQL Abfrage
             data: {ID, Name, Preis, Beschreibung},
-            //Vor der Anfrage kann ein "Warte-Text angezeigt werden
+            //Vor der Anfrage
             beforeSend: function (xhr) {
+                console.log("Bitte Warten...");
             },
             //Bei Fehler im PHP
             error: function (qXHR, textStatus, errorThrow) {
+                console.log("Beim Abrufen der Datenbank ist ein Fehler aufgetreten. Bitte den Administrator verständigen");
             },
             //Bei Fehlerfreien Ausführung
             success: function (data, textStatus, jqXHR) {
-                returnWare(data);
+                console.log(data);
             }
         });
     });
-
-    function returnWare(returnjsn) {
-        if (returnjsn != undefined) {
-            //Ergebnis der Abfrage HIER zurückgeben. ###TODO HTML Print out the Product
-            console.log(returnjsn);
-            return returnjsn;
-        } else {
-            console.log("Da ist nix zurückgekommen")
-        }
-    }
 }//ENDE function getProduct
 /*
  Autor: Christoph Ederer
  Funktion die alle Produkte in der SQL Datenbank  "waren" zurückgibt
-
+    EDIT: Nathan Bauer, Hinzu: Callback anstatt return
   Rückgabe in JSON Arrayform.
 */
 function getAllProducts(callback) {
     jQuery(document).ready(function ($) {
-        //Speichert die Serverresponse auf den Ajax Aufruf zwischen
-        var returnjsn;
-        var resp = $("#response");
+
         $.ajax({
             //Erstellt den "Post" an das PHP Skript
             type: "POST",
@@ -108,33 +175,20 @@ function getAllProducts(callback) {
             dataType: 'JSON',
             //Vor der Anfrage kann ein "Warte-Text angezeigt werden
             beforeSend: function (xhr) {
-                resp.html("Bitte Warten");
-                console.log("Sende...")
+                console.log("Bitte Warten...");
             },
 
             //Bei Fehler im PHP
             error: function (qXHR, textStatus, errorThrow) {
-                resp.html("Da ist wohl was schiefgelaufen. Bitte den Administrator verständigen");
+                console.log("Es ist ein Fehler beim Aufruf der Produkte aus der Datenbank aufgetreten. Bitte den Administrator verständigen");
             },
             //Bei Fehlerfreien Ausführung
             success: function (data, textStatus, jqXHR) {
-                //returnWaren(data);
-                resp.html(data);
+                //console.log(data);
                 callback(data);
             }
         });
-
     });
-
-    function returnWaren(returnjsn) {
-        if (returnjsn != undefined) {
-            console.log("return folgt" + returnjsn);
-            return returnjsn;
-        } else {
-            console.log("Da ist nix zurückgekommen")
-        }
-    }
-
 }//ENDE function getAllProducts
 /*
  Autor: Christoph Ederer
@@ -156,12 +210,15 @@ function yeetProduct(ID = 0, Name = 0, Preis = 0, Beschreibung = 0) {
             data: {ID, Name, Preis, Beschreibung},
             //Vor der Anfrage kann ein "Warte-Text angezeigt werden
             beforeSend: function (xhr) {
+                console.log("Bitte Warten...");
             },
             //Bei Fehler im PHP
             error: function (qXHR, textStatus, errorThrow) {
+                console.log("Beim Löschen des Produkts ist ein Fehler Aufgetreten");
             },
             //Bei Fehlerfreien Ausführung
             success: function (data, textStatus, jqXHR) {
+                console.log("Löschen des Datensatzes war erfolgreich.");
             }
         });
     });

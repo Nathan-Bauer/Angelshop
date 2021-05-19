@@ -28,3 +28,10 @@ Bis 05.05.2021
 
 - Anzeigen der Information aus der Datenbank auf der Webseite
 - Suchfunktion
+
+### Etappe 3
+
+Bis 12.05.2021
+
+- Bild In Datenbank Hochladen
+- Formular zum Artikel-Einfügen

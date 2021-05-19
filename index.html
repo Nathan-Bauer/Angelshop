@@ -19,7 +19,7 @@
                 <span class="price"></span>
             </div>
             <div class="product-picture">
-                A picture will be here.
+                <img name="product-picture">
             </div>
         </div>
         <br>
@@ -54,7 +54,7 @@
                     <span class="price">99,99 €</span>
                 </div>
                 <div id="myDIV" class="product-picture">
-                    This is my DIV element.
+                      <img src="" alt="Prod.picture" id="prod_pic">
                 </div>
             </div>
             <br>
@@ -68,6 +68,19 @@
         <input type="text" name="Name" id="Name"><br>
         <input type="number" step="0.01" min="0" name="Preis" id="Preis"><br>
         <input type="text" name="Beschreibung" id="Beschreibung"><br>
+        <select  name="Kategorie" id="Kategorie">
+            <option value="default">default</option>
+            <option value="Rute">Rute</option>
+            <option value="Rolle">Rolle</option>
+            <option value="Schnur">Schnur</option>
+            <option value="Haken">Haken</option>
+            <option value="Köder">Köder</option>
+            <option value="Futter">Futter</option>
+            <option value="Sonstiges">Sonstiges</option>
+        </select>
+        <br>
+
+        <input type="file" name="image[]" class="product-picture_input" /><br>
         <button type="button" onclick="">Submit</button>
     </form>
 </div>
@@ -78,9 +91,30 @@
 
 <script type="text/javascript">
     let button = document.querySelector("div.form button")
+    let picture = document.querySelector(".product-picture_input")
+
     button.addEventListener('click', () => {
-        if (confirm("Artikel hinzufügen?")) insertProduct(undefined, document.getElementById("Name").value,
-            document.getElementById("Preis").value, document.getElementById("Beschreibung").value)
+        if (confirm("Artikel hinzufügen?")) {
+            if (picture.files != undefined){
+                insertProduct(undefined,
+                    document.getElementById("Name").value,
+                    document.getElementById("Preis").value,
+                    document.getElementById("Beschreibung").value,
+                    document.getElementById("Kategorie").value,
+                    true)
+                insertPicture(picture.files);
+            }
+            else {
+                insertProduct(undefined,
+                    document.getElementById("Name").value,
+                    document.getElementById("Preis").value,
+                    document.getElementById("Beschreibung").value,
+                    document.getElementById("Kategorie").value,
+                    false)
+            }
+
+
+        }
     });
 
 </script>
@@ -98,21 +132,26 @@
 
 <script>
     getAllProducts(displayProducts);
-
     function displayProducts(products) {
-        console.log(products);
 
         products.forEach((product, index) => {
-            let clone = document.querySelector("template").content.cloneNode(true);
+            getPicture(product.Picture_ID,displayPicture);
+            function displayPicture(image){
+              let clone = document.querySelector("template").content.cloneNode(true);
+              let path = image[0].image;
 
-            clone.querySelector("div.product span.name").innerHTML = product.NAME;
-            clone.querySelector("div.product span.description").innerHTML = product.BESCHREIBUNG;
-            clone.querySelector("div.product span.price").innerHTML = "" + product.PREIS + " €";
+              clone.querySelector("div.product span.name").innerHTML = product.NAME;
+              clone.querySelector("div.product span.description").innerHTML = product.BESCHREIBUNG;
+              clone.querySelector("div.product span.price").innerHTML = "" + product.PREIS + " €";
 
-            clone.querySelector("div.product div.product-picture").id = index + "picture";
-            clone.querySelector("div.product span.name").name = index + "picture";
+              clone.querySelector("div.product div.product-picture").id = index + "picture";
+              clone.querySelector("div.product span.name").name = index + "picture";
+              clone.querySelector("div.product div.product-picture img[name='product-picture']").src =path;
+              document.querySelector("div.products-list").appendChild(clone);
+            }
 
-            document.querySelector("div.products-list").appendChild(clone);
+
+
         })
     }
 </script>
