@@ -66,11 +66,6 @@ function insertPicture(picture){
 
                     var response = this.responseText;
                     console.log("This is the Response from xhttp :".response);
-                    if(response == 1){
-                        alert("Upload successfully.");
-                    }else{
-                        alert("File not uploaded.");
-                    }
                 }
             };
 
