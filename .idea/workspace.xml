@@ -2,34 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed474476-9dc8-4b58-8995-b896e0c2be09" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Angelshop.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/img/background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/img/background2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/img/background3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/img/fishing-pole-icon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/img/shopping-cart.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/WHERE_TO_PUT_US.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/angelshop/db.opt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/angelshop/waren.frm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/angelshop/waren.ibd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_support.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon.ico" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/db_checkconn.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/db_connection.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/db_delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/db_insert_picture.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/db_insert_ware.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/db_select_all_ware.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/db_select_picture.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/db_select_ware.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/db_upload_picture.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +33,7 @@
       <option name="presentableId" value="Default" />
       <updated>1621949314504</updated>
       <workItem from="1621949317016" duration="5010000" />
+      <workItem from="1621976018571" duration="169000" />
     </task>
     <servers />
   </component>
