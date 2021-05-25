@@ -1,2 +1,0 @@
-###Zielpfad für den Ordner angelshop\
-C:\xampp\mysql\data\
